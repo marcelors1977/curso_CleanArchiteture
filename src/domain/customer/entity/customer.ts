@@ -33,10 +33,10 @@ export default class Customer implements CustomerInterface {
     }
 
     validate() {
-        if (this._name.length === 0) {
+        if (this.name === undefined || this.name === null || this._name.length === 0) {
             throw new Error('Name is required');
         }
-        if (this._id.length === 0) {
+        if (this._id === undefined || this._id === null || this._id.length === 0) {
             throw new Error('Id is required');
         }
     }

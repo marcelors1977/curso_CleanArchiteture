@@ -7,7 +7,6 @@ export default class Order {
     private _items: OrdemItem[] = [];
     private _total: number;
 
-    // constructor(id: string, customerId: string, items: OrdemItem[]) {
     constructor(props: OrderInterface) {
         const { id, customerId, items } = props;
 
@@ -32,19 +31,19 @@ export default class Order {
     }
 
     validate(): boolean {
-        if (this._id.length === 0) {
+        if (this._id === undefined || this._id === null || this._id.length === 0) {
             throw new Error('Id is required');
         }
 
-        if (this._customerId.length === 0) {
+        if (this._customerId === undefined || this._customerId === null || this._customerId.length === 0) {
             throw new Error('CustomerId is required');
         }
 
-        if(this._items.length === 0) {
+        if(this._items === undefined || this._items === null || this._items.length === 0) {
             throw new Error('Order needs to have almost one item');
         }
 
-        if (this._items.some(item => item.quantity <= 0)) {
+        if (this._items.some(item => item.quantity === undefined || item.quantity === null || item.quantity <= 0)) {
             throw new Error('Quantity must be greater than zero');
         }
         

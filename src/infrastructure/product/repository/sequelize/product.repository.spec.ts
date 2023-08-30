@@ -89,4 +89,12 @@ describe("Product repository unit test", () => {
         expect(productFound).toEqual(products);
         expect(productFound.length).toBe(2);
     });
+
+    it("should no find any product", async () => {
+        const productRepository = new ProductRepository();
+
+        const productFound = await productRepository.findAll();
+
+        expect(productFound).toHaveLength(0);
+    });
 });

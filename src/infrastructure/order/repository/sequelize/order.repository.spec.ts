@@ -155,7 +155,7 @@ describe("Order repository unit test", () => {
 
         const ordersFound = await orderRepository.findAll();
 
-        expect(ordersFound).toStrictEqual([]);
+        expect(ordersFound).toHaveLength(0);
     });
 
     it("should find all orders to a specific customer", async () => {

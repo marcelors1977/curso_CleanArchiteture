@@ -13,13 +13,11 @@ export default class CreateProductUseCase {
 
     async execute(input: InputCreateProductDto): Promise<OutputCreateProductDto> {
         const productMapped = new MapperToProductInterface().convertTo(input);
-
-        const product = ProductFactory.create({type: input.type,...productMapped});
-
+        const product = ProductFactory.create({type: input.type,...productMapped}); 
         await this.productRepository.create(product);
 
         const output = await this.productRepository.find(product.id);
-
+        
         return new MapperToOutputDto().convertTo(output);
     }
 

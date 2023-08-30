@@ -27,11 +27,18 @@ export default class ProductRepository implements ProductRepositoryInterface {
     }
 
     async find(id: string): Promise<ProductInterface> {
-        const productModel = await  ProductModel.findOne({
-            where: {
-                id: id
-            }
-        });
+        let productModel;
+        try {
+            productModel = await  ProductModel.findOne({
+                where: {
+                    id: id
+                },
+                rejectOnEmpty: true
+            });
+            
+        } catch (error) {
+            throw new Error("Product not found");            
+        }
 
         const productMapper = new MapperModelToProduct();
 
