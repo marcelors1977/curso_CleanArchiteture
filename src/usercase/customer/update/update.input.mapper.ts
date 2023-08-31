@@ -19,6 +19,6 @@ export default class MapperToCustomerInterface implements MapperUserCaseInterfac
                 }
             )
         };
-    };
+    }
 }
 

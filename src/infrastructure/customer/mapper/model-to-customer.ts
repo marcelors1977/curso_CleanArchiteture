@@ -1,7 +1,6 @@
 import Customer from "../../../domain/customer/entity/customer";
 import CustomerInterface from "../../../domain/customer/entity/customer.interface";
 import Address from "../../../domain/customer/value-object/address";
-import { checkIfHasAddress } from "../../../domain/customer/value-object/address.validator";
 import MapperInfrastructureInterface from "../../_shared/mapper/mapper-infra-interface";
 import CustomerModel from "../repository/sequelize/customer.model";
 
@@ -11,18 +10,22 @@ export default class MapperModelToCustomer implements MapperInfrastructureInterf
             id,
             name,
             rewardPoints,
+            hasAddress,
             active,
-            street,
-            number,
-            zipcode: zip,
-            city
         } = customerModel;
 
         const customer = new Customer({id, name});
 
-        if( checkIfHasAddress({street, number, zip, city}) ) {
-            customer.changeAddress(new Address({street, number, zip, city}));
-        }
+        if (hasAddress) {
+            customer.changeAddress(
+                new Address({
+                    street: customerModel.street,
+                    number: customerModel.number,
+                    zip: customerModel.zipcode,
+                    city: customerModel.city
+                })
+            );
+        } 
 
         customer.addRewardPoints(rewardPoints);
 

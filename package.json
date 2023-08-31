@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run tsc -- --noEmit && jest",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "lint": "eslint . --ext .ts"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,9 @@
     "@swc/core": "^1.2.148",
     "@swc/jest": "^0.2.20",
     "@types/jest": "^27.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.1.0",
     "jest": "^27.5.1",
     "ts-node": "^10.6.0",
     "tslint": "^6.1.3",

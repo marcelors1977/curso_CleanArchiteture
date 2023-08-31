@@ -5,8 +5,8 @@ export default class Customer implements CustomerInterface {
     private _id: string;
     private _name: string;
     private _address!: Address;
-    private _active: boolean = false;
-    private _rewardPoints: number = 0;
+    private _active = false;
+    private _rewardPoints = 0;
 
     constructor(props: CustomerInterface) {
         const { id, name } = props;

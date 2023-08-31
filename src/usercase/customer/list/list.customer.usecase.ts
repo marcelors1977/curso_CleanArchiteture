@@ -9,6 +9,7 @@ export default class ListCustomerUseCase {
         this.customerRepository = customerRepository;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async execute(input: InputListCustomerDto): Promise<OutputListCustomerDto> {
         const customers = await this.customerRepository.findAll();
 

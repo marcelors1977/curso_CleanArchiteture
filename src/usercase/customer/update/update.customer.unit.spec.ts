@@ -1,4 +1,4 @@
-import { createFakeCustomer, newFakeAddressEntity } from "../../../infrastructure/_generator-fake-data";
+import { createFakeCustomer } from "../../../infrastructure/_generator-fake-data";
 import UpdateCustomerUseCase from "./update.customer.usecase";
 
 const MockRepository = (customer: any) => {

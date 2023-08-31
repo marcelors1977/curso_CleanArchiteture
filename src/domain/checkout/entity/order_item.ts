@@ -5,7 +5,7 @@ export default class OrderItem {
     private _productId: string;
     private _name: string;
     private _price: number;
-    private _quantity: number = 0;
+    private _quantity =  0;
     
     // constructor(id: string, name: string, price: number, productId: string, quantity: number) {
     constructor(props: OrderItemInterface) {

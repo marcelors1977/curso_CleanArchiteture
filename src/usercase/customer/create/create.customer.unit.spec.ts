@@ -26,10 +26,11 @@ describe("Unit test create customer use case", () => {
             name: customer.name,
         }
 
-        const {rewardPoints, ...result} = await usecaseCreate.execute(input);
+        const {rewardPoints, active, ...result} = await usecaseCreate.execute(input);
 
         expect(result).toStrictEqual(input);
         expect(rewardPoints).toBe(0);
+        expect(active).toBe(false);
     });
 
     it("should create a new customer with address", async () => {
@@ -49,10 +50,11 @@ describe("Unit test create customer use case", () => {
             }
         }
 
-        const {rewardPoints, ...result} = await usecaseCreate.execute(input);
+        const {rewardPoints, active, ...result} = await usecaseCreate.execute(input);
 
         expect(result).toStrictEqual(input);
         expect(rewardPoints).toBe(0);
+        expect(active).toBe(false);
     });
 
     it("should create a new customer and activate it", async () => {

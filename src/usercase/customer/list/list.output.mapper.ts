@@ -31,5 +31,5 @@ export default class ListOutputMapper implements MapperUserCaseInterface<Custome
                     )
                 }))
         };
-    };
+    }
 }

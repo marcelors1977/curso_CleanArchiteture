@@ -37,7 +37,7 @@ const newFakeAddressEntity = (): Address =>{
 
 const createFakeOrder = async (customer_id: string): Promise<Order> => {
     const quantityItens = Math.trunc(Math.random() * 5 + 1);
-    let orderItems: OrderItem[] = [];
+    const orderItems: OrderItem[] = [];
 
     for (let index = 0; index < quantityItens; index++) {
         orderItems[index] = await createFakeOrderItem();

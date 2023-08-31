@@ -3,7 +3,7 @@ import ProductInterface from "./product.interface";
 export default class Product implements ProductInterface {
     private _id: string;
     private _name: string;
-    private _price: number = 0;
+    private _price = 0;
 
     constructor(props: ProductInterface) {
         const { id, name, price } = props;

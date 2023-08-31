@@ -10,6 +10,6 @@ export default class MapperToProductInterface implements MapperUserCaseInterface
             name: input.name,
             price: input.price
         };
-    };
+    }
 }
 

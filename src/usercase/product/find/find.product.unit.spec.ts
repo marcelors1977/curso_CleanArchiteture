@@ -1,4 +1,3 @@
-import Product from "../../../domain/product/entity/product";
 import { createFakeProduct } from "../../../infrastructure/_generator-fake-data";
 import FindOutputMapper from "./find.output.mapper";
 import FindProductUseCase from "./find.product.usecase";

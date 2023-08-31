@@ -15,8 +15,4 @@ const addressValidate = (props: AddressInterface) => {
     }
 }
 
-const checkIfHasAddress = (props: any): boolean => {
-    return props.street || props.number || props.zip || props.city ? true : false;
-}
-
-export  { addressValidate, checkIfHasAddress }
+export  { addressValidate }

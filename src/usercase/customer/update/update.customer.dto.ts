@@ -9,7 +9,7 @@ export interface InputUpdateCustomerDto {
     },
     rewardPoints?: number;
     active?: boolean;
-};
+}
 
 export interface OutputUpdateCustomerDto {
     id: string;
@@ -22,4 +22,4 @@ export interface OutputUpdateCustomerDto {
     },
     rewardPoints?: number;
     active?: boolean;
-};
+}

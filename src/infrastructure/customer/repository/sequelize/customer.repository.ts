@@ -2,7 +2,6 @@ import Customer from "../../../../domain/customer/entity/customer";
 import CustomerInterface from "../../../../domain/customer/entity/customer.interface";
 import CustomerRepositoryInterface from "../../../../domain/customer/repository/customer-repository.interface";
 import MapperModelToCustomer from "../../mapper/model-to-customer";
-import CustomerMapper from "../../mapper/model-to-customer";
 import MapperCustomerToModel from "../../mapper/customer-to-model";
 import CustomerModel from "./customer.model";
 
@@ -47,8 +46,6 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
 
     async findAll(): Promise<CustomerInterface[]> {
         const customerModels = await CustomerModel.findAll();
-
-        const customerMapper = new CustomerMapper();
 
         const customers = customerModels.map(customerModel => {            
             return new MapperModelToCustomer().convertTo(customerModel);

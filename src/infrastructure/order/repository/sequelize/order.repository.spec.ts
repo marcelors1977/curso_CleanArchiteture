@@ -6,7 +6,6 @@ import OrderRepository from "./order.repository";
 import { createFakeCustomer, createFakeOrder, createFakeOrderItem } from "../../../_generator-fake-data";
 import OrderModel from "./order.model";
 import CustomerRepository from "../../../customer/repository/sequelize/customer.repository";
-import OrderMapper from "../../mapper/order-to-model";
 import MapperOrderToModel from "../../mapper/order-to-model";
 
 describe("Order repository unit test", () => {
@@ -45,7 +44,7 @@ describe("Order repository unit test", () => {
 
         const orderMapper = new MapperOrderToModel();
 
-        let orderMappedToModel = orderMapper.convertTo(order);
+        const orderMappedToModel = orderMapper.convertTo(order);
 
         expect(orderModel.toJSON()).toStrictEqual(orderMappedToModel);
     });

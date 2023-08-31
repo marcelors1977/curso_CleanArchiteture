@@ -2,9 +2,10 @@ import { Sequelize } from "sequelize-typescript";
 import CustomerModel from "../../../infrastructure/customer/repository/sequelize/customer.model";
 import CustomerRepository from "../../../infrastructure/customer/repository/sequelize/customer.repository";
 import { createFakeCustomer } from "../../../infrastructure/_generator-fake-data";
-import FindCustomerUseCase from "./find.customer.usecase";
+import CreateCustomerUseCase from "./create.customer.usecase";
+import MapperCustomerToModel from "../../../infrastructure/customer/mapper/customer-to-model";
 
-describe("Test integration in find customer use case", () => {
+describe("Test integration in create customer use case", () => {
     let sequelize: Sequelize;
 
     beforeEach(async () => {
@@ -23,26 +24,21 @@ describe("Test integration in find customer use case", () => {
         await sequelize.close();
     });
 
-    it("should find a customer", async () => {
+    it("should create a customer", async () => {
        const customerRepository = new CustomerRepository();
-       const customer = createFakeCustomer({withAddress: true});
-       
-       await customerRepository.create(customer);
+       const customer = createFakeCustomer();
 
-       const usecase = new FindCustomerUseCase(customerRepository);
+       const usecase = new CreateCustomerUseCase(customerRepository);
 
-       const result = await usecase.execute({id: customer.id});
+       const customerMappedToModel = new MapperCustomerToModel().convertTo(customer);
+
+       const result = await usecase.execute(customerMappedToModel);
 
        expect(result).toEqual({
            id: customer.id,
            name: customer.name,
-           address: {
-               street: customer.address.street,
-               number: customer.address.number,
-               zip: customer.address.zipcode,
-               city: customer.address.city
-           }
+           rewardPoints: 0,
+           active: false
        });
     });
-    
-})
+});

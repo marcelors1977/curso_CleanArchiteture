@@ -2,7 +2,6 @@ import { Sequelize } from "sequelize-typescript";
 import CustomerModel from "./customer.model";
 import CustomerRepository from "./customer.repository";
 import { createFakeCustomer, newFakeAddressEntity } from "../../../_generator-fake-data";
-import CustomerMapper from "../../mapper/model-to-customer";
 import MapperCustomerToModel from "../../mapper/customer-to-model";
 
 describe("Customer unit test", () => {
@@ -33,7 +32,7 @@ describe("Customer unit test", () => {
         customer.changeAddress(address);
         await customerRepository.create(customer);
 
-        const customerModel = await CustomerModel.findOne({
+        const customerModel  = await CustomerModel.findOne({
             where: {
                 id: customer.id
             }
@@ -41,7 +40,8 @@ describe("Customer unit test", () => {
 
         const customerMappedToModel = new MapperCustomerToModel().convertTo(customer);
 
-        expect(customerModel.toJSON()).toStrictEqual(customerMappedToModel);
+        expect(customerModel.toJSON())
+            .toStrictEqual({...customerMappedToModel, hasAddress: true});
     });
 
     it("should create a customer without address", async () => {
@@ -64,7 +64,8 @@ describe("Customer unit test", () => {
             street: null,
             number: null,
             city: null,
-            zipcode: null
+            zipcode: null,
+            hasAddress: false
         });
     });
 

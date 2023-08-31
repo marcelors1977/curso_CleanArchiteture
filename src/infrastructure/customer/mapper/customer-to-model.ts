@@ -7,22 +7,27 @@ export default class MapperCustomerToModel implements MapperInfrastructureInterf
             id: customer.id,
             name: customer.name,
             ...(
-                customer.address && {
+                customer.address 
+                ? {
+                    hasAddress: true,
                     street: customer.address.street,
                     number: customer.address.number,
                     zipcode: customer.address.zipcode,
                     city: customer.address.city
                 }
-            ),
-            ...(
-                customer.isActive() !== undefined && {
-                    active: customer.isActive()
+                : {
+                    hasAddress: false
                 }
             ),
             ...(
-                customer.rewardPoints !== undefined && {
-                    rewardPoints: customer.rewardPoints
-                }
+                typeof customer.isActive === "function" && customer.isActive() !== undefined 
+                ? { active: customer.isActive() } 
+                : { active: false}
+            ),
+            ...(
+                customer.rewardPoints !== undefined 
+                ? { rewardPoints: customer.rewardPoints }
+                : { rewardPoints: 0 }
             )
         };
     }

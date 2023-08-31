@@ -17,16 +17,9 @@ export default class MapperToOutputDto implements MapperUserCaseInterface<Custom
                     }
                 }
             ),
-            ...(
-                input.rewardPoints !== undefined && {
-                    rewardPoints: input.rewardPoints
-                }
-            ),
-            ...(
-                input.isActive() && {
-                    active: input.isActive()
-                }
-            )
+            rewardPoints: input.rewardPoints ? input.rewardPoints : 0,
+            active: input.isActive() ? input.isActive() : false
+
         };
     }
 }

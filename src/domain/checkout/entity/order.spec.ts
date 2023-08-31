@@ -4,43 +4,43 @@ import OrderItem from "./order_item";
 describe("Order unit test", () => {
     it("should throw an error when id is empty", () => {
         expect(() => {
-            const order = new Order({id: "", customerId: "123", items: [] as any });
+            new Order({id: "", customerId: "123", items: [] as any });
         }).toThrowError("Id is required");
 
         expect(() => {
-            const order = new Order({id: null, customerId: "123", items: [] as any });
+            new Order({id: null, customerId: "123", items: [] as any });
         }).toThrowError("Id is required");
 
         expect(() => {
-            const order = new Order({id: undefined, customerId: "123", items: [] as any });
+            new Order({id: undefined, customerId: "123", items: [] as any });
         }).toThrowError("Id is required");
     });
 
     it("should throw an error when customerId is empty", () => {
         expect(() => {
-            const order = new Order({id: "123", customerId: "", items: [] as any});
+            new Order({id: "123", customerId: "", items: [] as any});
         }).toThrowError("CustomerId is required");
 
         expect(() => {
-            const order = new Order({id: "123", customerId: null, items: [] as any});
+            new Order({id: "123", customerId: null, items: [] as any});
         }).toThrowError("CustomerId is required");
 
         expect(() => {
-            const order = new Order({id: "123", customerId: undefined, items: [] as any});
+            new Order({id: "123", customerId: undefined, items: [] as any});
         }).toThrowError("CustomerId is required");
     });
 
     it("should throw an error when items is empty", () => {
         expect(() => {
-            const order = new Order({id: "123", customerId: "123", items: [] as any});
+            new Order({id: "123", customerId: "123", items: [] as any});
         }).toThrowError("Order needs to have almost one item");
 
         expect(() => {
-            const order = new Order({id: "123", customerId: "123", items: null});
+            new Order({id: "123", customerId: "123", items: null});
         }).toThrowError("Order needs to have almost one item");
 
         expect(() => {
-            const order = new Order({id: "123", customerId: "123", items: undefined});
+            new Order({id: "123", customerId: "123", items: undefined});
         }).toThrowError("Order needs to have almost one item");
     });
 
@@ -60,17 +60,17 @@ describe("Order unit test", () => {
     it("should throw error if the quantity is greater than zero", () => {
         expect(() => {
             const item = new OrderItem({id: "i1", name: "Item 1", price: 100, productId: "p1", quantity: 0});
-            const order = new Order({id: "o1", customerId: "c1", items: [item]});            
+            new Order({id: "o1", customerId: "c1", items: [item]});            
         }).toThrowError("Quantity must be greater than zero");
 
         expect(() => {
             const item = new OrderItem({id: "i1", name: "Item 1", price: 100, productId: "p1", quantity: null});
-            const order = new Order({id: "o1", customerId: "c1", items: [item]});            
+            new Order({id: "o1", customerId: "c1", items: [item]});            
         }).toThrowError("Quantity must be greater than zero");
 
         expect(() => {
             const item = new OrderItem({id: "i1", name: "Item 1", price: 100, productId: "p1", quantity: undefined});
-            const order = new Order({id: "o1", customerId: "c1", items: [item]});            
+            new Order({id: "o1", customerId: "c1", items: [item]});            
         }).toThrowError("Quantity must be greater than zero");
     });
 });

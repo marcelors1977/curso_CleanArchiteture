@@ -12,5 +12,5 @@ export default class ListOutputMapper implements MapperUserCaseInterface<Product
                     price: product.price
                 }))
         };
-    };
+    }
 }

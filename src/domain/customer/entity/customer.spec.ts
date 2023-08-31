@@ -5,29 +5,29 @@ describe("Customer unit test", () => {
 
     it("should throw an error when id is empty", () => {
         expect(() => {
-            const customer = new Customer({id: "", name: "John"});
+            new Customer({id: "", name: "John"});
         }).toThrowError("Id is required");
 
         expect(() => {
-            const customer = new Customer({id: null, name: "John"});
+            new Customer({id: null, name: "John"});
         }).toThrowError("Id is required");
 
         expect(() => {
-            const customer = new Customer({id: undefined, name: "John"});
+            new Customer({id: undefined, name: "John"});
         }).toThrowError("Id is required");
     });
 
     it("should throw an error when name is empty", () => {
         expect(() => {
-            const customer = new Customer({id: "123", name: ""});
+            new Customer({id: "123", name: ""});
         }).toThrowError("Name is required");
 
         expect(() => {
-            const customer = new Customer({id: "123", name: null});
+            new Customer({id: "123", name: null});
         }).toThrowError("Name is required");
 
         expect(() => {
-            const customer = new Customer({id: "123", name: undefined});
+            new Customer({id: "123", name: undefined});
         }).toThrowError("Name is required");
     });
 

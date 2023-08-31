@@ -12,6 +12,9 @@ export default class CustomerModel extends Model {
     @Column({ allowNull: false })
     declare name: string;
 
+    @Column({ allowNull: false })
+    declare hasAddress: boolean;
+
     @Column
     declare street: string;
 
