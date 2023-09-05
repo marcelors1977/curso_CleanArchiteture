@@ -6,7 +6,7 @@ import OrderRepository from "./order.repository";
 import { createFakeCustomer, createFakeOrder, createFakeOrderItem } from "../../../_generator-fake-data";
 import OrderModel from "./order.model";
 import CustomerRepository from "../../../customer/repository/sequelize/customer.repository";
-import MapperOrderToModel from "../../mapper/order-to-model";
+import OrderMapper from "../../mapper/order.mapper";
 
 describe("Order repository unit test", () => {
 
@@ -42,9 +42,9 @@ describe("Order repository unit test", () => {
             include: ["items"]
         });
 
-        const orderMapper = new MapperOrderToModel();
+        const orderMapper = new OrderMapper();
 
-        const orderMappedToModel = orderMapper.convertTo(order);
+        const orderMappedToModel = orderMapper.convertToModel(order);
 
         expect(orderModel.toJSON()).toStrictEqual(orderMappedToModel);
     });
@@ -69,9 +69,9 @@ describe("Order repository unit test", () => {
             include: ["items"]
         });
 
-        const orderMapper = new MapperOrderToModel();
+        const orderMapper = new OrderMapper();
 
-        let orderMappedToModel = orderMapper.convertTo(order);
+        let orderMappedToModel = orderMapper.convertToModel(order);
         
         expect(orderModelFound.toJSON()).toStrictEqual(orderMappedToModel);
 
@@ -86,7 +86,7 @@ describe("Order repository unit test", () => {
             include: ["items"]
         });
 
-        orderMappedToModel = orderMapper.convertTo(order);
+        orderMappedToModel = orderMapper.convertToModel(order);
 
         expect(orderModelFound2.toJSON()).toStrictEqual(orderMappedToModel);
     });

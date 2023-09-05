@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize-typescript";
 import CustomerModel from "./customer.model";
 import CustomerRepository from "./customer.repository";
 import { createFakeCustomer, newFakeAddressEntity } from "../../../_generator-fake-data";
-import MapperCustomerToModel from "../../mapper/customer-to-model";
+import CustomerMapper from "../../mapper/customer.mapper";
 
 describe("Customer unit test", () => {
 
@@ -38,7 +38,7 @@ describe("Customer unit test", () => {
             }
         });
 
-        const customerMappedToModel = new MapperCustomerToModel().convertTo(customer);
+        const customerMappedToModel = new CustomerMapper().convertToModel(customer);
 
         expect(customerModel.toJSON())
             .toStrictEqual({...customerMappedToModel, hasAddress: true});
@@ -92,7 +92,7 @@ describe("Customer unit test", () => {
             }
         });
 
-        const customerMappedToModel = new MapperCustomerToModel().convertTo(customer);
+        const customerMappedToModel = new CustomerMapper().convertToModel(customer);
 
         expect(customerModel.toJSON()).toStrictEqual(customerMappedToModel);
     });

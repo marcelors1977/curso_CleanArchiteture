@@ -1,14 +1,14 @@
 import Order from "../../../../domain/checkout/entity/order";
 import OrderItem from "../../../../domain/checkout/entity/order_item";
 import OrderRepositoryInterface from "../../../../domain/checkout/repository/order-repository.interface";
-import MapperModelToOrder from "../../mapper/model-to-order";
-import MapperOrderToModel from "../../mapper/order-to-model";
+import OrderMapper from "../../mapper/order.mapper";
 import OrderItemModel from "./order-item.model";
 import OrderModel from "./order.model";
 
 export default class OrderRepository implements OrderRepositoryInterface {
     async create(entity: Order): Promise<void> {
-        const modelMapped = new MapperOrderToModel().convertTo(entity);
+        const modelMapped = new OrderMapper().convertToModel(entity);
+
         try {
             await OrderModel.create(
                 modelMapped,
@@ -22,12 +22,12 @@ export default class OrderRepository implements OrderRepositoryInterface {
     }
 
     async update(entity: Order): Promise<void> {
-        const orderMapper = new MapperOrderToModel();
+        const orderMapper = new OrderMapper();
         const {
             id: entityOrderId, 
             items: entityOrderItems, 
             ...entityOrderOthers
-        } = orderMapper.convertTo(entity);
+        } = orderMapper.convertToModel(entity);
 
         const itemsIdOfOrderModelFound = (
             await this.find(entityOrderId)
@@ -82,7 +82,7 @@ export default class OrderRepository implements OrderRepositoryInterface {
             throw new Error("Order not found");
         }
 
-        return new MapperModelToOrder().convertTo(orderModel);
+        return new OrderMapper().convertToDomain(orderModel);
     }
 
     async findAll(): Promise<Order[]> {
@@ -95,10 +95,10 @@ export default class OrderRepository implements OrderRepositoryInterface {
             console.log(error);
         }
 
-        const orderMapper = new MapperModelToOrder;
+        const orderMapper = new OrderMapper;
 
         return orderModels.map(orderModel => {
-            return orderMapper.convertTo(orderModel);
+            return orderMapper.convertToDomain(orderModel);
         });
     }
 
@@ -115,10 +115,10 @@ export default class OrderRepository implements OrderRepositoryInterface {
             console.log(error);
         }
 
-        const orderMapper = new MapperModelToOrder();
+        const orderMapper = new OrderMapper();
 
         return orderModels.map(orderModel => {
-           return orderMapper.convertTo(orderModel);
+           return orderMapper.convertToDomain(orderModel);
         });
     }
 }

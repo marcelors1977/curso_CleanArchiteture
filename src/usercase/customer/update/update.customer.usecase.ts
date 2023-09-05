@@ -1,9 +1,7 @@
 import CustomerFactory from "../../../domain/customer/factory/customer.factory";
 import CustomerRepositoryInterface from "../../../domain/customer/repository/customer-repository.interface";
-import { InputUpdateCustomerDto, OutputUpdateCustomerDto } from "./update.customer.dto";
-import MapperToCustomerInterface from "./update.input.mapper";
-import UpdateOutputMapper from "./update.output.mapper";
-
+import { InputUpdateCustomerDto, OutputUpdateCustomerDto } from "./dto/update.customer.dto";
+import MapperUseCaseUpdate from "./mapper/update.mapper";
 export default class UpdateCustomerUseCase {
     private customerRepository: CustomerRepositoryInterface;
 
@@ -12,7 +10,7 @@ export default class UpdateCustomerUseCase {
     }
 
     async execute(input: InputUpdateCustomerDto): Promise<OutputUpdateCustomerDto> {   
-        const inputToCustomerInterface = new MapperToCustomerInterface().convertTo(input);
+        const inputToCustomerInterface = new MapperUseCaseUpdate().convertToDomain(input);
         let customerToUpdate;
 
         if ( input.address === undefined ) {
@@ -30,6 +28,6 @@ export default class UpdateCustomerUseCase {
 
         const customer = await this.customerRepository.find(input.id);
 
-        return new UpdateOutputMapper().convertTo(customer);
+        return new MapperUseCaseUpdate().convertToOutputUseCase(customer);
     }
 }

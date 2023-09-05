@@ -1,19 +1,18 @@
 import Customer from "../../../../domain/customer/entity/customer";
 import CustomerInterface from "../../../../domain/customer/entity/customer.interface";
 import CustomerRepositoryInterface from "../../../../domain/customer/repository/customer-repository.interface";
-import MapperModelToCustomer from "../../mapper/model-to-customer";
-import MapperCustomerToModel from "../../mapper/customer-to-model";
+import CustomerMapper from "../../mapper/customer.mapper";
 import CustomerModel from "./customer.model";
 
 export default class CustomerRepository implements CustomerRepositoryInterface {
 
     async create(entity: CustomerInterface): Promise<void> {
-        const modelMapped = new MapperCustomerToModel().convertTo(entity);
+        const modelMapped = new CustomerMapper().convertToModel(entity);
         await CustomerModel.create(modelMapped);
     }
 
     async update(entity: Customer): Promise<void> {
-        const modelMapped = new MapperCustomerToModel().convertTo(entity);
+        const modelMapped = new CustomerMapper().convertToModel(entity);
         const {id: entityId, ...customerModel} = modelMapped;
 
         await CustomerModel.update(
@@ -40,7 +39,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
             throw new Error("Customer not found");
         }
 
-        return new MapperModelToCustomer().convertTo(customerModel);
+        return new CustomerMapper().convertToDomain(customerModel);
 
     }
 
@@ -48,7 +47,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
         const customerModels = await CustomerModel.findAll();
 
         const customers = customerModels.map(customerModel => {            
-            return new MapperModelToCustomer().convertTo(customerModel);
+            return new CustomerMapper().convertToDomain(customerModel);
         });
 
         return customers;

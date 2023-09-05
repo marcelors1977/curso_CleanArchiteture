@@ -1,6 +1,6 @@
 import CustomerRepositoryInterface from "../../../domain/customer/repository/customer-repository.interface";
-import FindOutputMapper from "./find.output.mapper";
-import { InputFindCustomerDto, OutputFindCustomerDto } from "./find.customer.dto";
+import { InputFindCustomerDto, OutputFindCustomerDto } from "./dto/find.customer.dto";
+import MapperUseCaseFind from "./mapper/find.mapper";
 
 export default class FindCustomerUseCase {
     private customerRepository: CustomerRepositoryInterface;
@@ -11,6 +11,6 @@ export default class FindCustomerUseCase {
 
     async execute(input: InputFindCustomerDto): Promise<OutputFindCustomerDto> {
         const customer = await this.customerRepository.find(input.id);
-        return new FindOutputMapper().convertTo(customer);
+        return new MapperUseCaseFind().convertToOutputUseCase(customer);
     }
 }

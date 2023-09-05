@@ -1,3 +1,4 @@
-export default interface MapperInfrastructureInterface<T,U> {
-    convertTo(data: T): U;
+export default interface MapperInfrastructureInterface {
+    convertToDomain(data: any): any;
+    convertToModel(data: any): any;
 }

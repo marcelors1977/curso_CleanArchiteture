@@ -1,3 +1,4 @@
-export default interface MapperUserCaseInterface<T,U> {
-    convertTo(data: T): U;
+export default interface MapperUseCaseInterface {
+    convertToDomain(data: any): any;
+    convertToOutputUseCase(data: any): any;
 }
