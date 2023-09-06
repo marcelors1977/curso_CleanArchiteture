@@ -1,7 +1,9 @@
+import Entity from "../../_shared/entity/entity.abstract";
+import NotificationError from "../../_shared/notification/notification.error";
 import Address from "../value-object/address";
 import CustomerInterface from "./customer.interface";
 
-export default class Customer implements CustomerInterface {
+export default class Customer extends Entity implements CustomerInterface {
     private _id: string;
     private _name: string;
     private _address!: Address;
@@ -9,11 +11,16 @@ export default class Customer implements CustomerInterface {
     private _rewardPoints = 0;
 
     constructor(props: CustomerInterface) {
+        super();
         const { id, name } = props;
         
         this._id = id;
         this._name = name;
-        this.validate();      
+        this.validate();
+
+        if(this._notification.hasErrors()) {
+            throw new NotificationError(this._notification.getErrors());
+        }
     }
 
     get rewardPoints(): number {
@@ -34,10 +41,10 @@ export default class Customer implements CustomerInterface {
 
     validate() {
         if (this.name === undefined || this.name === null || this._name.length === 0) {
-            throw new Error('Name is required');
+            this._notification.addError({message: 'Name is required', context: 'customer'})
         }
         if (this._id === undefined || this._id === null || this._id.length === 0) {
-            throw new Error('Id is required');
+            this._notification.addError({message: 'Id is required', context: 'customer'})
         }
     }
     

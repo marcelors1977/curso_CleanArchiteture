@@ -2,6 +2,7 @@ import { Sequelize } from "sequelize-typescript";
 import { createFakeCustomer } from "../../_generator-fake-data";
 import CustomerModel from "../repository/sequelize/customer.model";
 import CustomerMapper from "./customer.mapper";
+import Notification from "../../../domain/_shared/notification/notification";
 
 describe("Customer Mapper unit test", () => {
     let sequelize: Sequelize;
@@ -89,6 +90,7 @@ describe("Customer Mapper unit test", () => {
         const customer = new CustomerMapper().convertToDomain(customerModel);
 
         expect(customer).toEqual({
+            _notification: new Notification(),
             _id: customerModel.id,
             _name: customerModel.name,
             _rewardPoints: customerModel.rewardPoints,
@@ -111,6 +113,7 @@ describe("Customer Mapper unit test", () => {
         const customer = new CustomerMapper().convertToDomain(customerModel)
 
         expect(customer).toEqual({
+            _notification: new Notification(),
             _id: customerModel.id,
             _name: customerModel.name,
             _rewardPoints: customerModel.rewardPoints,
@@ -140,6 +143,7 @@ describe("Customer Mapper unit test", () => {
         const customer = new CustomerMapper().convertToDomain(customerModel);
 
         expect(customer).toEqual({
+            _notification: new Notification(),
             _id: customerModel.id,
             _name: customerModel.name,
             _rewardPoints: customerModel.rewardPoints,

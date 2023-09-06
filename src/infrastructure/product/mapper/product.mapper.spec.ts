@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import ProductModel from "../repository/sequelize/product.model";
 import ProductMapper from "./product.mapper";
+import Notification from "../../../domain/_shared/notification/notification";
 
 describe("Product Mapper unit test", () => {
     let sequelize: Sequelize;
@@ -31,6 +32,7 @@ describe("Product Mapper unit test", () => {
         const product = new ProductMapper().convertToDomain(productModel);
 
         expect(product).toEqual({
+            _notification: new Notification(),
             _id: productModel.id,
             _name: productModel.name,
             _price: productModel.price
