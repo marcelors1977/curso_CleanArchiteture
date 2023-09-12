@@ -84,7 +84,7 @@ describe("Customer unit test", () => {
             const customer = new Customer({id: "123", name: "John"});
             customer.activate();
             console.log(customer._notification.getErrors());
-        }).toThrowError("Address is mandatory to activate a customer");
+        }).toThrowError("Address is mandatory to activat a customer");
     });
 
     it("should add reward points", () => {
