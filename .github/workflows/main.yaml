@@ -11,21 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      
-      - name: Set Up environment
-        env: 
-          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
-        run: |
-          
-          - name: "Iniciando container"
-            run: docker compose up --build -d  
-    
-          - name: check logs
-            run: docker compose logs app
-    
-          - name: "Executando lint"
-            run: docker compose exec -u node app npm run lint
-    
-          - name: "Executando testes"
-            run: docker compose exec  -u node app npm run test
+      # need checkout before using compose-action
+      - uses: actions/checkout@v3
+      - uses: isbang/compose-action@v1.5.1
+        with:
+          compose-file: "./docker-compose.yml"
+          down-flags: "--volumes"
+          services: app
+          run: npm run lint
