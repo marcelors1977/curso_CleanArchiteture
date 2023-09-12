@@ -1,8 +1,6 @@
 import Address from "../value-object/address";
 import Customer from "./customer";
 
-const temp: Address = 1;
-
 describe("Customer unit test", () => {
 
     it("should throw an error when id is empty", () => {
@@ -86,7 +84,7 @@ describe("Customer unit test", () => {
             const customer = new Customer({id: "123", name: "John"});
             customer.activate();
             console.log(customer._notification.getErrors());
-        }).toThrowError("Address is mandatory to activat a customer");
+        }).toThrowError("Address is mandatory to activate a customer");
     });
 
     it("should add reward points", () => {
