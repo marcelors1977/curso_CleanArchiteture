@@ -1,7 +1,7 @@
 import Address from "../value-object/address";
 import Customer from "./customer";
 
-const temp = 1;
+const temp: Address = 1;
 
 describe("Customer unit test", () => {
 
