@@ -4,7 +4,7 @@
 #     cp .env.example .env
 # fi
 
-npm install
+# npm install
 
 # npm start
 
