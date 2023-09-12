@@ -22,15 +22,7 @@ jobs:
         uses: jakejarvis/wait-action@v0.1.1
         with:
           # Follows the Linux sleep syntax for time units: a number followed by s for seconds, m for minutes, etc
-          time: 2m
-
-      - name: Curl for Github Actions
-        # You may pin to the exact commit or the version.
-        # uses: sozo-design/curl@bc0ed16542d8f815b6b80c3f49121373ace99c02
-        uses: sozo-design/curl@v1.0.2
-        with:
-           args: http://localhost:3000/customer
-        
+          time: 2m      
 
       # - uses: iFaxity/wait-on-action@v1.1.0
       #   with:
