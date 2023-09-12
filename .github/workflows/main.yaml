@@ -14,10 +14,10 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: "Iniciando container"
-        run: docker compose -f docker-compose_CI.yml up --build -d
+        run: docker compose up --build -d
 
-      - name: "Executando NPM Install"
-        run: docker compose exec -u node app npm install
+      - name: "Aguardando finalizar npm install"
+        run: docker compose exec app wait-for http://localhost:3000/customer -t 120 --
 
       - name: "Executando lint"
         run: docker compose exec -u node app npm run lint

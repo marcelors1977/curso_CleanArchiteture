@@ -4,8 +4,10 @@
 #     cp .env.example .env
 # fi
 
-# npm install
+npm install
+
+npm run dev
 
 # npm start
 
-tail -f /dev/null
+# tail -f /dev/null
