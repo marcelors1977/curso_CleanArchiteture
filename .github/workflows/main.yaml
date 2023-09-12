@@ -12,19 +12,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+      
       - name: Set Up environment
         env: 
           ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
-
-      - name: "Iniciando container"
-        run: docker compose up --build -d  
-
-      - name: check logs
-        run: docker compose logs app
-
-      - name: "Executando lint"
-        run: docker compose exec -u node app npm run lint
-
-      - name: "Executando testes"
-        run: docker compose exec  -u node app npm run test
+        run: |
+          
+          - name: "Iniciando container"
+            run: docker compose up --build -d  
+    
+          - name: check logs
+            run: docker compose logs app
+    
+          - name: "Executando lint"
+            run: docker compose exec -u node app npm run lint
+    
+          - name: "Executando testes"
+            run: docker compose exec  -u node app npm run test
