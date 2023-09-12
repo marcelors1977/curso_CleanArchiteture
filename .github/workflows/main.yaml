@@ -16,18 +16,8 @@ jobs:
       - name: "Iniciando container"
         run: docker compose up --build -d  
 
-      - name: Wait / Sleep
-        # You may pin to the exact commit or the version.
-        # uses: jakejarvis/wait-action@919fc193e07906705e5b7a50f90ea9e74d20b2b0
-        uses: jakejarvis/wait-action@v0.1.1
-        with:
-          # Follows the Linux sleep syntax for time units: a number followed by s for seconds, m for minutes, etc
-          time: 2m      
-
-      # - uses: iFaxity/wait-on-action@v1.1.0
-      #   with:
-      #     resource: http://localhost:3000/customer
-      #     timeout: 120000
+      - name: check logs
+        run: docker compose logs app
 
       - name: "Executando lint"
         run: docker compose exec -u node app npm run lint
