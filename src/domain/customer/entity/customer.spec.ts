@@ -1,6 +1,8 @@
 import Address from "../value-object/address";
 import Customer from "./customer";
 
+const temp = 1;
+
 describe("Customer unit test", () => {
 
     it("should throw an error when id is empty", () => {
