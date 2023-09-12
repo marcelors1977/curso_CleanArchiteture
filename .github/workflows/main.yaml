@@ -21,7 +21,7 @@ jobs:
 
       - uses: iFaxity/wait-on-action@v1.1.0
         with:
-          http: http://localhost:3000/customer
+          resource: http://localhost:3000/customer
           delay: 120000
 
       - name: "Executando lint"
