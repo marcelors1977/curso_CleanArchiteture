@@ -20,7 +20,6 @@ jobs:
       #   run: docker compose exec -t app wait-for app:3000 -t 120 -- echo "npm install finalizado"
 
       - uses: iFaxity/wait-on-action@v1.1.0
-      - name: "Aguardando finalizar npm install"
         with:
           resource: http://localhost:3000/customer
 
