@@ -17,8 +17,5 @@ jobs:
       with:
         compose-file: "./docker-compose.yml"
         down-flags: "--volumes"
-        services: |
-          helloworld2
-          helloworld3
-        test-container: helloworld
+        services: app
         test-command: "npm run lint"
