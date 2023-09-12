@@ -17,7 +17,7 @@ jobs:
         run: docker compose up --build -d
 
       - name: "Aguardando finalizar npm install"
-        run: docker compose exec -t app wait-for http://localhost:3000/customer -t 120 -- echo "npm install finalizado"
+        run: docker compose exec -t app wait-for http://app:3000/customer -t 120 -- echo "npm install finalizado"
 
       - name: "Executando lint"
         run: docker compose exec -u node app npm run lint
