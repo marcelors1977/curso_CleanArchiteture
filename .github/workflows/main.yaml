@@ -19,7 +19,7 @@ jobs:
       - uses: iFaxity/wait-on-action@v1.1.0
         with:
           resource: http://localhost:3000/customer
-          delay: 120000
+          timeout: 120000
 
       - name: "Executando lint"
         run: docker compose exec -u node app npm run lint
