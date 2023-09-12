@@ -14,12 +14,28 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: "Iniciando container"
-        run: docker compose up --build -d       
+        run: docker compose up --build -d  
 
-      - uses: iFaxity/wait-on-action@v1.1.0
+      - name: Wait / Sleep
+        # You may pin to the exact commit or the version.
+        # uses: jakejarvis/wait-action@919fc193e07906705e5b7a50f90ea9e74d20b2b0
+        uses: jakejarvis/wait-action@v0.1.1
         with:
-          resource: http://localhost:3000/customer
-          timeout: 120000
+          # Follows the Linux sleep syntax for time units: a number followed by s for seconds, m for minutes, etc
+          time: 2m
+
+      - name: Curl for Github Actions
+        # You may pin to the exact commit or the version.
+        # uses: sozo-design/curl@bc0ed16542d8f815b6b80c3f49121373ace99c02
+        uses: sozo-design/curl@v1.0.2
+        with:
+           args: http://localhost:3000/customer
+        
+
+      # - uses: iFaxity/wait-on-action@v1.1.0
+      #   with:
+      #     resource: http://localhost:3000/customer
+      #     timeout: 120000
 
       - name: "Executando lint"
         run: docker compose exec -u node app npm run lint
