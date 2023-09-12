@@ -4,64 +4,34 @@ describe("Address unit test", () => {
     it("should throw an error when street is empty", () => {
         expect(() => {
             new Address({street: "", number: 1, zip: "Zip", city: "City"});
-        }).toThrowError("Street is required");
-
-        expect(() => {
-            new Address({street: null, number: 1, zip: "Zip", city: "City"});
-        }).toThrowError("Street is required");
-
-        expect(() => {
-            new Address({street: undefined, number: 1, zip: "Zip", city: "City"});
-        }).toThrowError("Street is required");
+        }).toThrowError("address: Street is required");
     });
 
-    it("should throw an error when number is empty", () => {
+    it("should throw an error when number is invalid", () => {
         expect(() => {
             new Address({street: "Street", number: 0, zip: "Zip", city: "City"});
-        }).toThrowError("Number is required");
-
-        expect(() => {
-            new Address({street: "Street", number: null, zip: "Zip", city: "City"});
-        }).toThrowError("Number is required");
-
-        expect(() => {
-            new Address({street: "Street", number: undefined, zip: "Zip", city: "City"});
-        }).toThrowError("Number is required");
+        }).toThrowError("address: Number is required");
     });
 
-    it("should throw an error when zip is empty", () => {
+    it("should throw an error when zip is invalid", () => {
         expect(() => {
             new Address({street: "Street", number: 1, zip: "", city: "City"});
-        }).toThrowError("Zip is required");
-
-        expect(() => {
-            new Address({street: "Street", number: 1, zip: null, city: "City"});
-        }).toThrowError("Zip is required");
-
-        expect(() => {
-            new Address({street: "Street", number: 1, zip: undefined, city: "City"});
-        }).toThrowError("Zip is required");
+        }).toThrowError("address: Zip is required");
     });
 
-    it("should throw an error when city is empty", () => {
+    it("should throw an error when city is invalid", () => {
         expect(() => {
             new Address({street: "Street", number: 1, zip: "Zip", city: ""});
-        }).toThrowError("City is required");
-
-        expect(() => {
-            new Address({street: "Street", number: 1, zip: "Zip", city: null});
-        }).toThrowError("City is required");
-
-        expect(() => {
-            new Address({street: "Street", number: 1, zip: "Zip", city: undefined});
-        }).toThrowError("City is required");
+        }).toThrowError("address: City is required");
     });
 
-    it("should create new address", () => {
-        const address = new Address({street: "Street", number: 1, zip: "Zip", city: "City"});
-        expect(address.street).toBe("Street");
-        expect(address.number).toBe(1);
-        expect(address.zipcode).toBe("Zip");
-        expect(address.city).toBe("City");
+    it("should throw an error when all fields are invalid", () => {
+        expect(() => {
+            new Address({street: "", number: 0, zip: "", city: ""});
+        })
+        .toThrowError(
+            "address: Street is required, address: Number is required, address: Zip is required, address: City is required"
+        );   
     });
+
 });

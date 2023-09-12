@@ -119,6 +119,7 @@ describe("Customer Mapper unit test", () => {
             _rewardPoints: customerModel.rewardPoints,
             _active: false,
             _address: {
+                _notification: new Notification(),
                 _street: customerModel.street,
                 _number: customerModel.number,
                 _zip: customerModel.zipcode,
@@ -149,11 +150,12 @@ describe("Customer Mapper unit test", () => {
             _rewardPoints: customerModel.rewardPoints,
             _active: true,
             _address: {
+                _notification: new Notification(),
                 _street: customerModel.street,
                 _number: customerModel.number,
                 _zip: customerModel.zipcode,
                 _city: customerModel.city
             }
-        })
-    })
+        });
+    });
 });

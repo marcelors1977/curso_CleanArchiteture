@@ -1,0 +1,23 @@
+name: Curso CleanArchiteture em NodeJS
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: "Iniciando container"
+        run: docker-compose up --build -d
+
+      - name: "Executando lint"
+        run: docker compose exec app npm run lint
+
+      - name: "Executando testes"
+        run: docker compose exec app npm run test

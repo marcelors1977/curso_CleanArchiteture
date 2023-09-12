@@ -34,7 +34,7 @@ describe("Customer unit test", () => {
     it("should throw an error when name and id is empty", () => {
         expect(() => {
             new Customer({id: "", name: ""});
-        }).toThrowError("customer: Name is required, customer: Id is required");
+        }).toThrowError("customer: Id is required, customer: Name is required");
     });
 
     it("should create a new Customer without address", () => {
@@ -83,6 +83,7 @@ describe("Customer unit test", () => {
         expect(() => {
             const customer = new Customer({id: "123", name: "John"});
             customer.activate();
+            console.log(customer._notification.getErrors());
         }).toThrowError("Address is mandatory to activate a customer");
     });
 

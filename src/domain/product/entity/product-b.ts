@@ -1,8 +1,9 @@
 import Entity from "../../_shared/entity/entity.abstract";
 import NotificationError from "../../_shared/notification/notification.error";
+import productValidator from "../validator/product.validator";
 import ProductInterface from "./product.interface";
 
-export default class ProductB extends Entity implements ProductInterface {
+export default class ProductB extends Entity {
     private _id: string;
     private _name: string;
     private _price = 0;
@@ -21,21 +22,11 @@ export default class ProductB extends Entity implements ProductInterface {
         }
     }
 
-    validate(): boolean {
-        if (this._id === undefined || this._id === null || this._id.length === 0) {
-            // throw new Error('Id is required');
-            this._notification.addError({message: 'Id is required', context: 'product'})
-        }
-        if ( this._name === undefined || this._name === null || this._name.length === 0) {
-            // throw new Error('Name is required');
-            this._notification.addError({message: 'Name is required', context: 'product'})
-        }
-        if ( this._price === undefined || this._price === null || this._price < 0) {
-            // throw new Error('Price must be greater than zero');
-            this._notification.addError({message: 'Price must be greater than zero', context: 'product'})
-        }
-
-        return true;
+    validate() {
+        const notifications = productValidator.create().validate(this);
+        notifications.getErrors().forEach(error => {
+            this._notification.addError(error);
+        });
     }
 
     get id(): string {
