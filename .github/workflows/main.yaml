@@ -17,7 +17,7 @@ jobs:
         run: docker compose up --build -d
 
       - name: "Executando NPM Install"
-        run: docker compose exec app npm install
+        run: docker compose exec -u node app npm install
 
       - name: "Executando lint"
         run: docker compose exec app npm run lint
