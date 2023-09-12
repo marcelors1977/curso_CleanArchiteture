@@ -4,6 +4,8 @@
 #     cp .env.example .env
 # fi
 
+cd /home/node/app
+
 npm install
 
 npm run dev
