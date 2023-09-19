@@ -64,6 +64,33 @@ describe("E@E test for customer", () => {
         const customerResponse2 = listResponse.body.customers[1];
         expect(customerResponse2.name).toBe(customer2.name);
         expect(customerResponse2.address.street).toBe(customer2.address.street);
+
+        const listResponseXML = await request(app)
+            .get("/customer")
+            .set("Accept", "application/xml")
+            .send();
+        
+        expect(listResponseXML.status).toBe(200);
+        expect(listResponseXML.text).toContain(`<?xml version="1.0" encoding="UTF-8"?>`);
+        expect(listResponseXML.text).toContain(`<customers>`);
+        expect(listResponseXML.text).toContain(`<customer>`);
+        expect(listResponseXML.text).toContain(`<name>${customer1.name}</name>`);
+        expect(listResponseXML.text).toContain(`<address>`);
+        expect(listResponseXML.text).toContain(`<street>${customer1.address.street}</street>`);
+        expect(listResponseXML.text).toContain(`<number>${customer1.address.number}</number>`);
+        expect(listResponseXML.text).toContain(`<zip>${customer1.address.zipcode}</zip>`);
+        expect(listResponseXML.text).toContain(`<city>${customer1.address.city}</city>`);
+        expect(listResponseXML.text).toContain(`</address>`);
+        expect(listResponseXML.text).toContain(`</customer>`);
+        expect(listResponseXML.text).toContain(`<customer>`);
+        expect(listResponseXML.text).toContain(`<name>${customer2.name}</name>`);
+        expect(listResponseXML.text).toContain(`<address>`);
+        expect(listResponseXML.text).toContain(`<street>${customer2.address.street}</street>`);
+        expect(listResponseXML.text).toContain(`<number>${customer2.address.number}</number>`);
+        expect(listResponseXML.text).toContain(`<zip>${customer2.address.zipcode}</zip>`);
+        expect(listResponseXML.text).toContain(`<city>${customer2.address.city}</city>`);
+        expect(listResponseXML.text).toContain(`</address>`);
+        expect(listResponseXML.text).toContain(`</customer>`);
    });
 
 });
