@@ -21,7 +21,7 @@ export default class CustomerMapper implements MapperInfrastructureInterface {
                 new Address({
                     street: customerModel.street,
                     number: customerModel.number,
-                    zip: customerModel.zipcode,
+                    zipcode: customerModel.zipcode,
                     city: customerModel.city
                 })
             );

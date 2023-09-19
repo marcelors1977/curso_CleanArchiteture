@@ -1,11 +1,9 @@
-import Notification from "../../../_shared/notification/notification";
 import ValidatorInterface from "../../../_shared/validator/validator.interface";
 import ProductInterface from "../../entity/product.interface";
 import * as yup from "yup";
 
-export default class ProductYupValidator implements ValidatorInterface<ProductInterface, Notification> {
-    validate(entity: ProductInterface): Notification {
-        const notification = new Notification();
+export default class ProductYupValidator implements ValidatorInterface<ProductInterface> {
+    validate(entity: ProductInterface): void {
         try {
             yup.object().shape({
                 id: yup
@@ -18,9 +16,10 @@ export default class ProductYupValidator implements ValidatorInterface<ProductIn
                     .required("Name is required"),
                 price: yup
                     .number()
+                    .transform(value => Number.isNaN(value) ? null : value)
+                    .required("Price must be greater than zero")
                     .nullable()
-                    .min(1,"Price must be greater than zero")
-                    .required("Price must be greater than zero"),
+                    .min(1,"Price must be greater than zero"),
             })
             .validateSync({
                 id: entity.id,
@@ -33,14 +32,11 @@ export default class ProductYupValidator implements ValidatorInterface<ProductIn
         } catch (errors) {
             const e = errors as yup.ValidationError;
             e.errors.forEach(error => {
-                notification.addError({
+                entity._notification.addError({
                     message: error,
                     context: "product"
                 });
             });
         }
-
-        return notification;
-
     }
 }

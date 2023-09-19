@@ -32,7 +32,7 @@ export default class MapperUseCaseCreate implements MapperUseCaseInterface {
                     address: new Address({
                         street: input.address.street,
                         number: input.address.number,
-                        zip: input.address.zip,
+                        zipcode: input.address.zip,
                         city: input.address.city
                     })
                 })

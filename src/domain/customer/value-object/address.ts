@@ -11,7 +11,7 @@ export default class Address extends Entity {
 
     constructor(props: AddressInterface) {
         super();
-        const { street, number, zip, city } = props;
+        const { street, number, zipcode: zip, city } = props;
         this._street = street;
         this._number = number;
         this._zip = zip;
@@ -41,14 +41,6 @@ export default class Address extends Entity {
     }
 
     validate() {
-        const { street, number, zipcode: zip, city } = this;
-        const notifications = 
-            AddressValidator
-            .create()
-            .validate({street, number, zip, city});
-
-        notifications.getErrors().forEach(error => {
-            this._notification.addError(error);
-        });
+        AddressValidator.create().validate(this);
     }
 }

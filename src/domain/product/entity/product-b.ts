@@ -1,6 +1,6 @@
 import Entity from "../../_shared/entity/entity.abstract";
 import NotificationError from "../../_shared/notification/notification.error";
-import productValidator from "../validator/product.validator";
+import ProductValidator from "../validator/product.validator";
 import ProductInterface from "./product.interface";
 
 export default class ProductB extends Entity {
@@ -23,10 +23,7 @@ export default class ProductB extends Entity {
     }
 
     validate() {
-        const notifications = productValidator.create().validate(this);
-        notifications.getErrors().forEach(error => {
-            this._notification.addError(error);
-        });
+        ProductValidator.create().validate(this);
     }
 
     get id(): string {

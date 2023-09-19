@@ -1,5 +1,6 @@
 import Customer from "../entity/customer";
 import CustomerInterface from "../entity/customer.interface";
+import Address from "../value-object/address";
 
 export default class CustomerFactory {
     static create(props: CustomerInterface): Customer {
@@ -8,8 +9,9 @@ export default class CustomerFactory {
 
     static createWithAddress(props: CustomerInterface): Customer {
         const {address, ...otherProps} = props;
+        const addressObj = new Address(address);
         const customer = new Customer(otherProps);
-        customer.changeAddress(address);
+        customer.changeAddress(addressObj);
         return customer;
     }
 }

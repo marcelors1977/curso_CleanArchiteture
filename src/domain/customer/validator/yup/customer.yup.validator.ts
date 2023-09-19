@@ -1,15 +1,19 @@
 import ValidatorInterface from "../../../_shared/validator/validator.interface";
 import * as yup from "yup";
 import CustomerInterface from "../../entity/customer.interface";
-import Notification from "../../../_shared/notification/notification";
 
-export default class CustomerYupValidator implements ValidatorInterface<CustomerInterface,Notification> {
-    validate(entity: CustomerInterface): Notification {
-        const notification = new Notification();
+export default class CustomerYupValidator implements ValidatorInterface<CustomerInterface> {
+    validate(entity: CustomerInterface): void {
         try {
             yup.object().shape({
-                id: yup.string().nullable().required("Id is required"),
-                name: yup.string().nullable().required("Name is required"),
+                id: yup
+                    .string()
+                    .nullable()
+                    .required("Id is required"),
+                name: yup
+                    .string()
+                    .nullable()
+                    .required("Name is required"),
             })
             .validateSync({
                 id: entity.id,
@@ -21,13 +25,11 @@ export default class CustomerYupValidator implements ValidatorInterface<Customer
         } catch (errors) {
             const e = errors as yup.ValidationError;
             e.errors.forEach(error => {
-                notification.addError({
+                entity._notification.addError({
                     message: error,
                     context: "customer"
                 });
             });
         }
-
-        return notification;
     }
 }

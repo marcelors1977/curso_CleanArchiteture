@@ -30,7 +30,7 @@ const newFakeAddressEntity = (): Address =>{
     return new Address({
         street: faker.address.streetName(), 
         number: Math.trunc(Math.random() * 1000 + 1), 
-        zip: faker.address.zipCode(),
+        zipcode: faker.address.zipCode(),
         city: faker.address.city()
     });
 }
@@ -46,7 +46,6 @@ const createFakeOrder = async (customer_id: string): Promise<Order> => {
     return new Order({id: uuid(),customerId: customer_id, items: orderItems});
 }
 
-// const createFakeOrderItem = async (): Promise<OrderItem> => {
 const createFakeOrderItem = async (): Promise<OrderItem> => {
     const product = createFakeProduct();
     const productRepository = new ProductRepository();

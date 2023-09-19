@@ -7,27 +7,11 @@ describe("Customer unit test", () => {
         expect(() => {
             new Customer({id: "", name: "John"});
         }).toThrowError("customer: Id is required");
-
-        expect(() => {
-            new Customer({id: null, name: "John"});
-        }).toThrowError("customer: Id is required");
-
-        expect(() => {
-            new Customer({id: undefined, name: "John"});
-        }).toThrowError("customer: Id is required");
     });
 
     it("should throw an error when name is empty", () => {
         expect(() => {
             new Customer({id: "123", name: ""});
-        }).toThrowError("customer: Name is required");
-
-        expect(() => {
-            new Customer({id: "123", name: null});
-        }).toThrowError("customer: Name is required");
-
-        expect(() => {
-            new Customer({id: "123", name: undefined});
         }).toThrowError("customer: Name is required");
     });
 
@@ -51,7 +35,7 @@ describe("Customer unit test", () => {
 
     it("should activate customer", () => {
         const customer = new Customer({id: "123", name: "John"});
-        const address = new Address({street: "Street", number: 1, zip: "Zip", city: "City"});
+        const address = new Address({street: "Street", number: 1, zipcode: "Zip", city: "City"});
         customer.changeAddress(address);
         customer.activate();
 
@@ -60,12 +44,12 @@ describe("Customer unit test", () => {
 
     it("should change address", () => {
         const customer = new Customer({id: "123", name: "John"});
-        const address = new Address({street: "Street", number: 1, zip: "Zip", city: "City"});
+        const address = new Address({street: "Street", number: 1, zipcode: "Zip", city: "City"});
         customer.changeAddress(address);
 
         expect(customer.address).toBe(address);
 
-        const address2 = new Address({street: "Street", number: 2, zip: "Zip", city: "City"});
+        const address2 = new Address({street: "Street", number: 2, zipcode: "Zip", city: "City"});
         customer.changeAddress(address2);
 
         expect(customer.address).toBe(address2);

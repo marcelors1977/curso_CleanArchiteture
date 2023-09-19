@@ -41,10 +41,7 @@ export default class Customer extends Entity  {
     }
 
     validate() {
-        const notifications = CustomerValidator.create().validate(this);
-        notifications.getErrors().forEach(error => {
-            this._notification.addError(error);
-        });
+        CustomerValidator.create().validate(this);
     }
     
     changeName(name: string) {
